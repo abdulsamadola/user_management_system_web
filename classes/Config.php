@@ -9,7 +9,9 @@ class Config {
                 $config = $config[$path];
             }
         }
+        return  $config;
+
         }
-        return $config;
+     return false;
     }
 } 

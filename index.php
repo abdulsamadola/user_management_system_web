@@ -1,4 +1,7 @@
 <?php
 include_once 'core/init.php';
 
-echo Config::get('mysql/password'); 
+$user = DB::getinstance()->update("users", 1, array(
+     'username' => 'olamilekan',
+     'password' => 'newpass',
+));

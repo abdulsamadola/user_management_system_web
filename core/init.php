@@ -2,7 +2,6 @@
 session_start();
 
 $GLOBALS['config'] = array(
-
     'mysql' => array(
         'host' => '127.0.0.1',
         'username' => 'root',
@@ -18,7 +17,7 @@ $GLOBALS['config'] = array(
         'session_name' => 'user'
 
      )
-     );
+         );
 
      spl_autoload_register('Loadclasses');
 
