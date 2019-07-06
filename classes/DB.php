@@ -108,14 +108,18 @@ class DB {
             $set = '';
             $x   = 1;
          foreach($fields as $field=>$value){
-             $set .= "{$field} =?";
+             $set .= "{$field} = ?";
              if($x < count($fields)){
                  $set .= ", ";
+
+                 $x++;
              }
          }
         $sql = "UPDATE {$table} SET {$set} WHERE id={$id}";
-        echo $sql;
-        die($sql);
+        if(!$this->query($sql, $fields)->error()){
+            return true;
+        }
+        return false;
         }
         
 }
