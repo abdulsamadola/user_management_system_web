@@ -2,9 +2,29 @@
 include_once 'core/init.php';
 
 if(Input::exists()){
-  echo 'Am not empty';  
-}else{
-    echo 'Am empty!';
+$validate = new Validate();
+
+$validate->check($_POST, 
+                   array(
+                   'username' => array(
+                   'required' => true,
+                   'min'      => 2,
+                   'max'      => 50
+                 ),
+
+                 'password' => array(
+                   'required' => true
+                 ),
+                 
+                 'name' => array(
+                   'required' => true,
+                   'min'      => 2,
+                   'max'      => 50
+                 )
+
+                 ));
+
+        
 }
 
 ?>
