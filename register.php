@@ -9,7 +9,8 @@ $validate->check($_POST,
                    'username' => array(
                    'required' => true,
                    'min'      => 2,
-                   'max'      => 50
+                   'max'      => 50,
+                   'unique'   => 'users'
                  ),
 
                  'password' => array(
@@ -19,11 +20,25 @@ $validate->check($_POST,
                  'name' => array(
                    'required' => true,
                    'min'      => 2,
-                   'max'      => 50
+                   'max'      => 50,
+                 ),
+                 
+                 'cpassword' => array(
+                  'matches'  => 'password',
+                  'required' => true
                  )
 
-                 ));
+                 )); 
 
+
+if($validate->passed()){
+  echo 'done';
+}else{
+
+  foreach($validate->display() as $display){
+    echo "{$display} <br />";
+  }
+}
         
 }
 
@@ -43,14 +58,15 @@ $validate->check($_POST,
 <form action="" method="post">
 <input type="text" name="username" id="username" placeholder="Username" value="<?= escape(Input::get('username')); ?>">
 <br />
-<input type="text" name="password" id="password" placeholder="Password">
+<input type="password" name="password" id="password" placeholder="Password">
 <br />
 
-<input type="text" name="cpassword" id="cpassword" placeholder="Confirm Password">
+<input type="password" name="cpassword" id="cpassword" placeholder="Confirm Password">
 <br />
 
-<input type="text" name="name" id="name" placeholder="Name">
+<input type="text" name="name" id="name" placeholder="Name" value="<?= escape(Input::get('name')); ?>">
 <br />
+<input type="hidden" name="token" value="<?= Token::generate(); ?>" />
 <input type="submit" value="Register">
 
 </form>
