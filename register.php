@@ -32,10 +32,31 @@ $validate->check($_POST,
 
                  )); 
 
-
 if($validate->passed()){
- Session::flash('success', 'Registration was successful!');
- header('location: index.php');
+
+  try{
+    $user = new User();
+    $salt = Hash::salt(32);
+  
+    $user->create(array(
+      'username' => Input::get('username'),
+      'password' => Hash::make(Input::get('password'), $salt),
+      'salt'     => $salt,
+      'name'     => Input::get('name'),
+      'joined'   => date('Y-m-d H:i:s'),
+      'group'    => 1
+
+
+    ));
+
+    Session::flash('success', 'Registration was successful!, you can now logi into your account');
+    header('location: index.php');
+
+
+  }catch(Exception $e){
+    die($e->getMessage());
+
+  }
 
 }else{
 
