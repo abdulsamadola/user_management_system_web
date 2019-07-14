@@ -34,3 +34,5 @@ $GLOBALS['config'] = array(
      }
 
      include_once 'functions/sanitize.php';
+     include_once 'includes/random_compat/lib/random.php';
+     

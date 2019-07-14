@@ -6,7 +6,7 @@ class Hash{
     }
 
     public static function salt($number){
-        return mcrypt_create_iv($number);
+        return bin2hex(random_bytes($number));
 
     }
 
