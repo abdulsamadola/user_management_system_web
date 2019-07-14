@@ -2,6 +2,8 @@
 include_once 'core/init.php';
 
 if(Input::exists()){
+if(Token::check(Input::get('token'))){
+
 $validate = new Validate();
 
 $validate->check($_POST, 
@@ -32,14 +34,16 @@ $validate->check($_POST,
 
 
 if($validate->passed()){
-  echo 'done';
+ Session::flash('success', 'Registration was successful!');
+ header('location: index.php');
+
 }else{
 
   foreach($validate->display() as $display){
     echo "{$display} <br />";
   }
 }
-        
+}       
 }
 
 ?>
@@ -55,7 +59,7 @@ if($validate->passed()){
 <body>
 <fieldset>
 <title>title="Register Form</title>
-<form action="" method="post">
+<form action="" method="post" autocomplete="off">
 <input type="text" name="username" id="username" placeholder="Username" value="<?= escape(Input::get('username')); ?>">
 <br />
 <input type="password" name="password" id="password" placeholder="Password">
