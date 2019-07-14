@@ -36,7 +36,7 @@ if($validate->passed()){
 
   try{
     $user = new User();
-    $salt = Hash::salt(32);
+    $salt = Hash::salt(5);
   
     $user->create(array(
       'username' => Input::get('username'),
@@ -50,7 +50,7 @@ if($validate->passed()){
     ));
 
     Session::flash('success', 'Registration was successful!, you can now logi into your account');
-    header('location: index.php');
+    Redirect::to('index.php');
 
 
   }catch(Exception $e){
